@@ -17,6 +17,10 @@ import org.junit.Test;
 
 public class DataUtilitiesTest extends DataUtilities {
 	
+	/*
+	 * these are values created to mock class creation
+	 * 
+	 */
 	private Mockery mockingContext;
 	private Values2D values;
 	private KeyedValues keyedValues;
@@ -29,6 +33,10 @@ public class DataUtilitiesTest extends DataUtilities {
 	}
 
 
+	/*
+	 * this function tests DataUtilities.calculateColumnTotal()
+	 * with NULL for input for values2D.
+	 */
      @Test
      public void calculateColumnTotalForNullData() {
         try{
@@ -40,6 +48,10 @@ public class DataUtilitiesTest extends DataUtilities {
         }
      }
 
+ 	/*
+ 	 * this function tests DataUtilities.calculateColumnTotal()
+ 	 * with an empty set of data. Using ECT
+ 	 */
      @Test
      public void calculateColumnTotalForEmpty() {
          mockingContext.checking(new Expectations() {
@@ -52,6 +64,15 @@ public class DataUtilitiesTest extends DataUtilities {
          assertEquals(result, 0, .000000001d);
      }
      
+     
+     
+  	/*
+  	 * this function tests DataUtilities.calculateColumnTotal()
+  	 * by inputting an invalid column value. Using ECT UB
+  	 */
+ 	//TEST FAILED AND SHOWED ERROR DUE TO COMPLICATIONS WITH VALUE2D
+ 	//Assume that functionality of "invalid row/column number will equate to 0"
+ 	//was not implemented correctly.
    @Test
    public void calculateColumnTotalForThreeValuesInvalidColoumn() {
        mockingContext.checking(new Expectations() {
@@ -77,6 +98,11 @@ public class DataUtilitiesTest extends DataUtilities {
       
    }
 
+   
+ 	/*
+ 	 * this function tests DataUtilities.calculateColumnTotal()
+ 	 * with a non-empty column set of three. Using ECT
+ 	 */ 
      @Test
      public void calculateColumnTotalForThreeValues() {
          mockingContext.checking(new Expectations() {
@@ -98,7 +124,10 @@ public class DataUtilitiesTest extends DataUtilities {
      }
      
 
-     
+  	/*
+  	 * this function tests DataUtilities.calculateColumnTotal()
+  	 * with a non-empty column set with more than one column. Using ECT
+  	 */  
     @Test
   	public void calculateColumnTotalWithTwoColoumnsFirstColoumn() {
      	 mockingContext.checking(new Expectations() {
@@ -125,7 +154,11 @@ public class DataUtilitiesTest extends DataUtilities {
   		
   	}
 
-     
+    
+  	/*
+  	 * this function tests DataUtilities.calculateColumnTotal()
+  	 * with a non-empty column set with more than one column. Using ECT
+  	 */  
     @Test
  	public void calculateColumnTotalWithTwoColoumnsSecondColoumn() {
     	 mockingContext.checking(new Expectations() {
@@ -153,6 +186,10 @@ public class DataUtilitiesTest extends DataUtilities {
  	}
     
 
+	/*
+	 * this function tests DataUtilities.calculateRowTotal()
+	 * with NULL for input for values2D. Using ECT.
+	 */
 	@Test
 	public void calculateRowTotalTest() {
         try{
@@ -164,7 +201,10 @@ public class DataUtilitiesTest extends DataUtilities {
         }
 	}
 
-
+	/*
+	 * this function tests DataUtilities.calculateRowTotal()
+	 * with empty set of values in row. Using ECT.
+	 */
 	@Test
 	public void calculateRowTotalifRowsEmptyTest() {
         mockingContext.checking(new Expectations() {
@@ -178,6 +218,10 @@ public class DataUtilitiesTest extends DataUtilities {
 	}
 	
 	
+  	/*
+  	 * this function tests DataUtilities.calculateRowTotal()
+  	 * by inputting an invalid row value. Using ECT UB
+  	 */
 	//TEST FAILED AND SHOWED ERROR DUE TO COMPLICATIONS WITH VALUE2D
 	//Assume that functionality of "invalid row number will equate to 0"
 	//was not implemented correctly.
@@ -203,6 +247,13 @@ public class DataUtilitiesTest extends DataUtilities {
 	}
 	
 	
+	/*
+  	 * this function tests DataUtilities.calculateRowTotal()
+  	 * by inputting an invalid row value. Using ECT LB
+  	 */
+	//TEST FAILED AND SHOWED ERROR DUE TO COMPLICATIONS WITH VALUE2D
+	//Assume that functionality of "invalid row number will equate to 0"
+	//was not implemented correctly.
 	@Test
 	public void calculateRowTotalifInvalidColumnEnteredUB() {
 	    mockingContext.checking(new Expectations() {
@@ -224,6 +275,10 @@ public class DataUtilitiesTest extends DataUtilities {
 	    assertEquals(result, 0, .000000001d);
 	}
 	
+  	/*
+  	 * this function tests DataUtilities.calculateRowTotal()
+  	 * with a non-empty column set with more than one Row. Using ECT
+  	 */  
 	@Test
 	public void calculateRowTotalifColumnOnBoundary() {
 	    mockingContext.checking(new Expectations() {
@@ -243,6 +298,11 @@ public class DataUtilitiesTest extends DataUtilities {
 			assertEquals(result, 10, .000000001d);
 	}
 	
+	
+  	/*
+  	 * this function tests DataUtilities.calculateRowTotal()
+  	 * with a non-empty column set with more than one Row. Using ECT
+  	 */ 
 	@Test
 	public void calculateRowTotalifColumnInBoundary() {
    	 mockingContext.checking(new Expectations() {
@@ -268,7 +328,11 @@ public class DataUtilitiesTest extends DataUtilities {
 		assertEquals(14, result, .000000001d);
 	}
 
-	
+
+  	/*
+  	 * this function tests createNumberArray()
+  	 * to see if it throws the correct exception with a NULL argument.
+  	 */ 
 	@Test
 	public void createNumberArrayWNullPointer() {
 	    try {
@@ -278,7 +342,12 @@ public class DataUtilitiesTest extends DataUtilities {
 	        assertTrue(e instanceof InvalidParameterException);
 	    }
 	}
-
+	
+	
+ 	/*
+  	 * this function tests createNumberArray()
+  	 * to see if it throws the correct exception with an invalid argument.
+  	 */ 
 	@Test
 	public void CreateNumberArrayWhenNotEmptyInvalidParamException() {
 	    double[] data = {'a','b', 'c'};
@@ -290,6 +359,11 @@ public class DataUtilitiesTest extends DataUtilities {
 	    }
 	}
 	
+	
+ 	/*
+  	 * this function tests createNumberArray()
+  	 * to see if it throws any exception with an valid argument.
+  	 */ 
 	@Test
 	public void CreateNumberArrayWhenNotEmptyValidParamException() {
 	    double[] data = {5.0 ,1.0, 4.0};
@@ -297,6 +371,11 @@ public class DataUtilitiesTest extends DataUtilities {
 	}
 	
 	
+	
+ 	/*
+  	 * this function tests DataUtilities.createNumberArray2Dy()
+  	 * to see if it throws the correct exception with a NULL argument.
+  	 */
     @Test
     public void createNullNumberArray2D() {
         try {
@@ -311,6 +390,11 @@ public class DataUtilitiesTest extends DataUtilities {
         
     }
     
+    
+ 	/*
+  	 * this function tests DataUtilities.createNumberArray2Dy()
+  	 * to see if it throws the correct exception with an invalid argument.
+  	 */
     @Test
     public void createInvalidNumberArray2D() {
         try {
@@ -326,6 +410,10 @@ public class DataUtilitiesTest extends DataUtilities {
     }
     
     
+ 	/*
+  	 * this function tests DataUtilities.createNumberArray2Dy()
+  	 * to see if the values within the dataset are correct.
+  	 */
     @Test
     public void createNumberArray2D() {
         double[][] data = { { 5.0, 1.0, 4.0 }, { 3.0, 2.0, 5.0 } };
@@ -343,6 +431,11 @@ public class DataUtilitiesTest extends DataUtilities {
         }
     }
     
+    
+ 	/*
+  	 * this function tests getCumulativePercentages(null)
+  	 * to see if it throws the correct exception for the NULL argument
+  	 */
     @Test
     public void getCumulativePercentagesInvalidParamException() {
 	    try {
@@ -353,6 +446,11 @@ public class DataUtilitiesTest extends DataUtilities {
     	
     }
     
+    
+ 	/*
+  	 * this function tests getCumulativePercentages(null)
+  	 * to see if it gets the correct values for positive values.
+  	 */
 	@Test
 	public void getCumulativePercentagesPositiveNumbers() {
 		mockingContext.checking(new Expectations() {
@@ -382,6 +480,10 @@ public class DataUtilitiesTest extends DataUtilities {
 
 	}
 	
+ 	/*
+  	 * this function tests getCumulativePercentages(null)
+  	 * to see if it gets the correct values for positive AND negative values.
+  	 */
 	@Test
 	public void getCumulativePercentagesNegativeNumbers() {
 		mockingContext.checking(new Expectations() {
